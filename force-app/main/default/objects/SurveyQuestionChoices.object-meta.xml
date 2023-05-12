@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Survey Question Choices</description>
+    <enableActivities>false</enableActivities>
+    <fields>
+        <fullName>Name</fullName>
+        <externalId>false</externalId>
+        <label>Name</label>
+        <length>80</length>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </fields>
+    <fields>
+        <fullName>Choice_Name__c</fullName>
+        <description>Name of the Choice</description>
+        <label>Choice Name</label>
+        <length>255</length>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Survey_Question__c</fullName>
+        <description>Survey Question </description>
+        <label>Survey Question</label>
+        <referenceTo>Survey_Question__c</referenceTo>
+        <relationshipLabel>Survey Questions</relationshipLabel>
+        <relationshipName>Survey_Questions__r</relationshipName>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <label>Survey Question Choices</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>Name</columns>
+        <columns>Choice_Name__c</columns>
+        <columns>Survey_Question__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <pageLayouts>
+        <fullName>Survey_Question_Choices_Layout</fullName>
+        <availableForEdit>false</availableForEdit>
+        <availableForNew>false</availableForNew>
+        <description>Survey Question Choices Layout</description>
+        <label>Survey Question Choices Layout</label>
+        <sections>
+            <columns>1</columns>
+            <customLabel>Survey Question Choices Section</customLabel>
+            <label>Survey Question Choices Information</label>
+            <layoutRows>
+                <layoutItems>
+                    <behavior>Edit</behavior>
+                    <field>Name</field>
+                </layoutItems>
+                <layoutItems>
+                    <behavior>Edit</behavior>
+                    <field>Choice_Name__c</field>
+                </layoutItems>
+                <layoutItems>
+                    <behavior>Edit</behavior>
+                    <field>Survey_Question__c</field>
+                </layoutItems>
+            </layoutRows>
+        </sections>
+    </pageLayouts>
+    <pluralLabel>Survey Question Choices</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Master</fullName>
+        <active>true</active>
+        <available>true</available>
+        <defaultRecordTypeMapping>true</defaultRecordTypeMapping>
+        <description>Default Record Type</description>
+        <label>Master</label>
+    </recordTypes>
+    <recordTypeVisibilities>
+        <default>true</default>
+        <master>true</master>
+    </recordTypeVisibilities>
+    <searchLayouts>
+        <fullName>Survey_Question_Choices_Search</fullName>
+        <listViewButtons>
+            <fullName>Edit</fullName>
+        </listViewButtons>
+        <listViewButtons>
+            <fullName>Delete</fullName>
+        </listViewButtons>
+        <listViewButtons>
+            <fullName>Clone</fullName>
+        </listViewButtons>
+        <listViewButtons>
+            <fullName>View</fullName
