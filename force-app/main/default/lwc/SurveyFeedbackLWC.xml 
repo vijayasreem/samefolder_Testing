@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <objects>
+                <object>Survey_Questions__c</object>
+            </objects>
+        </targetConfig>
+    </targetConfigs>
+    <masterDefinition>
+        <component>
+            <description>Survey Feedback Lightning Web Component</description>
+            <design>
+                <designSystem>
+                    <type>lwc</type>
+                </designSystem>
+            </design>
+            <implements>
+                <implements>force:appHostable</implements>
+            </implements>
+            <isExposed>true</isExposed>
+            <targets>
+                <target>lightning__AppPage</target>
+                <target>lightning__RecordPage</target>
+            </targets>
+        </component>
+    </masterDefinition>
+    <styles>
+        <styleItem>
+            <name>style</name>
+            <type>THEME</type>
+        </styleItem>
+    </styles>
+    <resources>
+        <resource>
+            <resourceName>surveyFeeback_LWC</resourceName>
+            <staticResource>
+                <cacheControl>Private</cacheControl>
+                <contentType>application/zip</contentType>
+            </staticResource>
+        </resource>
+    </resources>
+</LightningComponentBundle>

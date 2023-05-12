@@ -1,0 +1,116 @@
+<template>
+  <lightning-card title="Survey Feedback" icon-name="custom:custom17">
+    <div class="slds-m-around_medium">
+      <!-- display survey questions -->
+      <template if:true={questions}>
+        <lightning-accordion allow-multiple-sections-open>
+          <template for:each={questions} for:item="question">
+            <lightning-accordion-section name={question.Id} label={question.Name}>
+              <!-- display question type -->
+              <template if:true={question.Type__c == 'text'}>
+                <div class="slds-m-bottom_small">
+                  <lightning-input
+                    type="text"
+                    label={question.Name}
+                    required="true"
+                    value={inputValue}
+                    onchange={handleInputChange}
+                  ></lightning-input>
+                </div>
+              </template>
+              <template if:true={question.Type__c == 'singleChoice'}>
+                <div class="slds-m-bottom_small">
+                  <!-- display question choices -->
+                  <template for:each={question.Question_Choices__r.records} for:item="choice">
+                    <lightning-input
+                      type="radio"
+                      name={question.Name}
+                      label={choice.Name}
+                      value={choice.Id}
+                      checked={choice.Id === selectedValue}
+                      onchange={handleInputChange}
+                    ></lightning-input>
+                  </template>
+                </div>
+              </template>
+              <template if:true={question.Type__c == 'multiChoice'}>
+                <div class="slds-m-bottom_small">
+                  <!-- display question choices -->
+                  <template for:each={question.Question_Choices__r.records} for:item="choice">
+                    <lightning-input
+                      type="checkbox"
+                      name={question.Name}
+                      label={choice.Name}
+                      value={choice.Id}
+                      checked={choice.Id === selectedValue}
+                      onchange={handleInputChange}
+                    ></lightning-input>
+                  </template>
+                </div>
+              </template>
+              <template if:true={question.Type__c == 'rating'}>
+                <div class="slds-m-bottom_small">
+                  <lightning-rating
+                    label={question.Name}
+                    max-rating={10}
+                    value={ratingValue}
+                    onchange={handleRatingChange}
+                  ></lightning-rating>
+                </div>
+              </template>
+            </lightning-accordion-section>
+          </template>
+        </lightning-accordion>
+      </template>
+      <!-- display submit button -->
+      <lightning-button
+        variant="brand"
+        label="Submit"
+        title="Submit"
+        onclick={handleSubmit}
+      ></lightning-button>
+    </div>
+  </lightning-card>
+</template>
+
+<script>
+  import { LightningElement, wire, track } from 'lwc';
+  import getQuestions from '@salesforce/apex/SurveyQuestionsController.getQuestions';
+  import saveResponse from '@salesforce/apex/SurveyQuestionsController.saveResponse';
+
+  export default class SurveyFeedback extends LightningElement {
+    @track questions;
+    @track selectedValue;
+    @track ratingValue;
+    @track inputValue;
+
+    @wire(getQuestions)
+    wiredQuestions({ error, data }) {
+      if (data) {
+        this.questions = data;
+      } else if (error) {
+        // eslint-disable-next-line no-console
+        console.log(error);
+      }
+    }
+
+    // handle selected value
+    handleInputChange(event) {
+      this.selectedValue = event.target.value;
+    }
+
+    // handle rating value
+    handleRatingChange(event) {
+      this.ratingValue = event.target.value;
+    }
+
+    // handle input value
+    handleInputChange(event) {
+      this.inputValue = event.target.value;
+    }
+
+    // handle submit
+    handleSubmit() {
+      const surveyResponse = {
+        selectedValue: this.selectedValue,
+        ratingValue: this.rating
